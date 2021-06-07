@@ -1,5 +1,5 @@
 {
-  "name": "moving_cms_ui",
+  "name": "cms_ui",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.0",
-    "antd": "^4.9.3",
+    "antd": "^4.16.2",
     "axios": "^0.21.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

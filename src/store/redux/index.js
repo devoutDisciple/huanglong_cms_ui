@@ -1,6 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import middlewares from './middlewares';
-import rootReducer from './redux';
+import middlewares from '../middlewares/index';
+import rootReducer from '../global/reducer';
 
 const dynamicReducers = {};
 const store = createStore(combineReducers({ ...rootReducer }), applyMiddleware(...middlewares));

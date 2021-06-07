@@ -11,7 +11,7 @@ export default () => {
 	const onSelectMenu = (data) => history.push(data.path);
 	return (
 		<>
-			<div className={styles.title}>MOVING洗衣</div>
+			<div className={styles.title}>omoschool</div>
 			<Menu className={styles.menu} defaultSelectedKeys={['data']} mode="inline" theme="dark">
 				{router.contentRouter.map((item) => {
 					if (item.showMenu) {

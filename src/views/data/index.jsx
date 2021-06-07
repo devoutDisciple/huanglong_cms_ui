@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import TitleChunk from './TitleChunk';
 import styles from './index.less';
 import './redux/redux';
@@ -7,7 +7,7 @@ import * as action from './redux/action';
 
 export default () => {
 	const dispatch = useDispatch();
-	const data = useSelector((state) => state.data);
+	// const data = useSelector((state) => state.data);
 
 	useEffect(() => {
 		dispatch(action.getOrderDataNum());

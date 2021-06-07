@@ -1,4 +1,4 @@
-import { addReduce } from '@store/index';
+import { addReduce } from '@store/redux/index';
 
 const initState = {};
 
