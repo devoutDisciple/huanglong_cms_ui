@@ -45,11 +45,11 @@ Axios.interceptors.response.use(
 		if (data.code === 401 && hash !== '/login') {
 			// message.warning('请重新登录');
 			window.location.hash = '/login';
-			return Promise.reject('请重新登录');
+			return Promise.reject('请登录');
 		}
-		// 高德地图的请求
-		if (data.status === 1) {
-			return Promise.resolve(data);
+		if (data.code === 500) {
+			message.warning(data.message || '系统错误, 请稍后重试');
+			return Promise.reject(data.message || '系统错误, 请稍后重试');
 		}
 		if (data.code !== 200) {
 			message.warning(data.message || '系统错误, 请稍后重试');

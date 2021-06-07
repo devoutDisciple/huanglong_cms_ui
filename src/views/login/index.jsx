@@ -1,15 +1,14 @@
 import React from 'react';
-import config from '@config/config';
+import { Form } from 'antd';
 import styles from './index.less';
 
 export default () => {
 	console.log(123);
+	const [form] = Form.useForm();
 	return (
 		<div className={styles.login}>
-			<div className={styles.containt}>
-				<div className={styles.header}>
-					<img src={`${config.baseUrl}${config.iconUrl}`} alt="加载失败" />
-				</div>
+			<div className={styles.login_form}>
+				<Form form={form}>1111</Form>
 			</div>
 		</div>
 	);

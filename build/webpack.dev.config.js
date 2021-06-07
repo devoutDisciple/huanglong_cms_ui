@@ -16,13 +16,8 @@ const webpackDevConfig = {
 		open: true,
 		clientLogLevel: 'none',
 		proxy: {
-			'/api': {
-				target: 'http://localhost:8080',
-				changeOrigin: true,
-				pathRewrite: { '^/api': '' },
-			},
 			'/**': {
-				target: 'http://localhost:8080',
+				target: 'http://localhost:8081',
 				changeOrigin: true,
 			},
 		},
