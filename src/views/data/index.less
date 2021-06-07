@@ -1,0 +1,36 @@
+.data {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .title {
+        height: 140px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .title_chunk {
+            background: #fff;
+            width: 19%;
+            height: 140px;
+
+            .title_chunk_name {
+                height: 50px;
+                line-height: 50px;
+                text-align: center;
+            }
+
+            .title_chunk_num {
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+                font-size: 32px;
+                font-weight: 600;
+            }
+        }
+    }
+    .content {
+        flex: 1;
+        margin-top: 10px;
+        background: #fff;
+    }
+}
