@@ -1,12 +1,11 @@
 import { getLogin, login } from '@service/login.js';
 
 // 验证是否登录
-export const getLoginFunc = () => (dispatch, getState) => {
-	getLogin().then(() => {
-		console.log(getState());
+export const getLoginFunc = () => (dispatch) => {
+	getLogin().then((res) => {
 		dispatch({
 			type: 'user/setLogin',
-			payload: true,
+			payload: res.data,
 		});
 	});
 };

@@ -25,6 +25,8 @@
         "@utils/*": ["src/utils/*"],
         "@views": ["src/views"],
         "@views/*": ["src/views/*"],
+        "@menu": ["src/menu"],
+        "@menu/*": ["src/menu/*"],
         "@router": ["src/router"],
         "@router/*": ["src/router/*"],
         "@store": ["src/store"],

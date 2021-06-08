@@ -6,7 +6,7 @@ export default {
 	user: (state = USER_INIT_STATE, action) => {
 		switch (action.type) {
 			case 'user/setLogin':
-				return { ...state, isLogin: true };
+				return { ...state, isLogin: true, userinfo: { ...state.userinfo, ...action.payload } };
 			case 'user/setUserinfo':
 				return { ...state, isLogin: true, userinfo: { ...state.userinfo, ...action.payload } };
 			default:

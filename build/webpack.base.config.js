@@ -104,6 +104,7 @@ module.exports = (mode) => {
 			alias: {
 				'@component': path.resolve(__dirname, '../src/component'),
 				'@views': path.resolve(__dirname, '../src/views'),
+				'@menu': path.resolve(__dirname, '../src/menu'),
 				'@utils': path.resolve(__dirname, '../src/utils'),
 				'@config': path.resolve(__dirname, '../src/config'),
 				'@service': path.resolve(__dirname, '../src/service'),
