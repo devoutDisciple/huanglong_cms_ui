@@ -8,7 +8,7 @@ export default {
 			case 'user/setLogin':
 				return { ...state, isLogin: true };
 			case 'user/setUserinfo':
-				return { ...state, userinfo: { ...state.userinfo, ...action.payload } };
+				return { ...state, isLogin: true, userinfo: { ...state.userinfo, ...action.payload } };
 			default:
 				return state;
 		}

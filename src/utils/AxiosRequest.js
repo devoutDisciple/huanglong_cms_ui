@@ -45,11 +45,11 @@ Axios.interceptors.response.use(
 		if (data.code === 401 && hash !== '/login') {
 			// message.warning('请重新登录');
 			window.location.hash = '/login';
-			return Promise.reject('请登录');
+			return Promise.resolve(data);
 		}
 		if (data.code === 500) {
 			message.warning(data.message || '系统错误, 请稍后重试');
-			return Promise.reject(data.message || '系统错误, 请稍后重试');
+			return Promise.resolve(data);
 		}
 		if (data.code !== 200) {
 			message.warning(data.message || '系统错误, 请稍后重试');
@@ -83,7 +83,7 @@ export default {
 					else reject(res);
 				})
 				.catch((err) => {
-					message.error(`error: ${err}`);
+					message.warning(`系统错误: ${err}`);
 					reject(err);
 				});
 		}),
@@ -99,7 +99,7 @@ export default {
 					else reject(res);
 				})
 				.catch((err) => {
-					message.error(`post:服务端出错: ${err}`);
+					message.warning(`系统错误: ${err}`);
 					reject(err);
 				});
 		}),
@@ -115,7 +115,7 @@ export default {
 					else reject(res);
 				})
 				.catch((err) => {
-					message.error(`put:服务端出错: ${err}`);
+					message.warning(`系统错误: ${err}`);
 					reject(err);
 				});
 		}),
@@ -131,7 +131,7 @@ export default {
 					else reject(res);
 				})
 				.catch((err) => {
-					message.error(`delete:服务端出错: ${err}`);
+					message.warning(`系统错误: ${err}`);
 					reject(err);
 				});
 		}),
