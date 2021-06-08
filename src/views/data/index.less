@@ -32,6 +32,24 @@
     .content {
         flex: 1;
         margin-top: 10px;
-        background: #fff;
+        .con_row {
+            display: flex;
+            .con_chunk {
+                flex: 1;
+            }
+            .con_chunk:nth-child(2n + 1) {
+                margin-right: 20px;
+            }
+            .charts_con {
+                min-height: 300px;
+                display: flex;
+                .charts {
+                    flex: 1;
+                }
+                .charts_desc {
+                    width: 100px;
+                }
+            }
+        }
     }
 }

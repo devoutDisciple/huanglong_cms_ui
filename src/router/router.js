@@ -16,7 +16,7 @@ const rootRouter = [
 const contentRouter = [
 	{
 		key: 'data',
-		name: '数据汇总',
+		name: '数据监控',
 		path: '/home/data',
 		icon: '',
 		showMenu: true,
