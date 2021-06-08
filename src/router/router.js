@@ -23,12 +23,12 @@ const contentRouter = [
 		components: () => import('@views/data/index'),
 	},
 	{
-		key: 'adver',
-		name: 'APP首屏广告',
-		path: '/home/adver',
+		key: 'user',
+		name: '用户管理',
+		path: '/home/user',
 		icon: '',
 		showMenu: true,
-		components: () => import('@views/data/index'),
+		components: () => import('@views/user/index'),
 	},
 	{
 		key: 'area',
@@ -48,7 +48,7 @@ const contentRouter = [
 	},
 	{
 		key: 'account',
-		name: '账号管理',
+		name: '用户管理',
 		path: '/home/account',
 		icon: '',
 		showMenu: true,

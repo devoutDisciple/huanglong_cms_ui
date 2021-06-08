@@ -4,6 +4,8 @@ const initState = {
 	totalData: {},
 	userData: {},
 	publishData: {},
+	goodsData: {},
+	commentsData: {},
 };
 
 const data = (state = initState, action) => {
@@ -14,6 +16,10 @@ const data = (state = initState, action) => {
 			return { ...state, userData: action.payload };
 		case 'data/setPublishData':
 			return { ...state, publishData: action.payload };
+		case 'data/setGoodsData':
+			return { ...state, goodsData: action.payload };
+		case 'data/setCommnetsData':
+			return { ...state, commentsData: action.payload };
 		default:
 			break;
 	}

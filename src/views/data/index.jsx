@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Card, Badge } from 'antd';
+import { Card } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import echarts from '@component/ercharts/index';
 import echarts_theme from '@component/ercharts/echarts_theme';
@@ -10,7 +10,7 @@ import * as action from './redux/action';
 
 export default () => {
 	const dispatch = useDispatch();
-	const { totalData, userData, publishData } = useSelector((state) => state.data);
+	const { totalData, userData, publishData, goodsData, commentsData } = useSelector((state) => state.data);
 
 	useEffect(() => {
 		// 获取汇总数据
@@ -19,6 +19,10 @@ export default () => {
 		dispatch(action.getUserNumDataFunc());
 		// 获取发布内容增长曲线
 		dispatch(action.getPublishNumDataFunc());
+		// 获取点赞增长曲线
+		dispatch(action.getGoodsNumDataFunc());
+		// 获取评论增长曲线
+		dispatch(action.getCommentsNumDataFunc());
 	}, [dispatch]);
 
 	useEffect(() => {
@@ -71,6 +75,56 @@ export default () => {
 		}
 	}, [publishData.xAxis, publishData.yAxis]);
 
+	useEffect(() => {
+		if (Array.isArray(goodsData.xAxis) && goodsData.xAxis.length !== 0) {
+			const myChart = echarts.init(document.getElementById('goods'), echarts_theme);
+			myChart.setOption({
+				xAxis: {
+					type: 'category',
+					data: goodsData.xAxis,
+				},
+				yAxis: {
+					type: 'value',
+				},
+				tooltip: {
+					trigger: 'axis',
+				},
+				series: [
+					{
+						data: goodsData.yAxis,
+						type: 'line',
+						smooth: true,
+					},
+				],
+			});
+		}
+	}, [goodsData.xAxis, goodsData.yAxis]);
+
+	useEffect(() => {
+		if (Array.isArray(commentsData.xAxis) && commentsData.xAxis.length !== 0) {
+			const myChart = echarts.init(document.getElementById('comments'), echarts_theme);
+			myChart.setOption({
+				xAxis: {
+					type: 'category',
+					data: commentsData.xAxis,
+				},
+				yAxis: {
+					type: 'value',
+				},
+				tooltip: {
+					trigger: 'axis',
+				},
+				series: [
+					{
+						data: commentsData.yAxis,
+						type: 'line',
+						smooth: true,
+					},
+				],
+			});
+		}
+	}, [commentsData.xAxis, commentsData.yAxis]);
+
 	return (
 		<div className={styles.data}>
 			<div className={styles.title}>
@@ -99,6 +153,22 @@ export default () => {
 						<Card title="发布">
 							<div className={styles.charts_con}>
 								<div id="publish" className={styles.charts} />
+							</div>
+						</Card>
+					</div>
+				</div>
+				<div className={styles.con_row}>
+					<div className={styles.con_chunk}>
+						<Card title="点赞">
+							<div className={styles.charts_con}>
+								<div id="goods" className={styles.charts} />
+							</div>
+						</Card>
+					</div>
+					<div className={styles.con_chunk}>
+						<Card title="评论">
+							<div className={styles.charts_con}>
+								<div id="comments" className={styles.charts} />
 							</div>
 						</Card>
 					</div>

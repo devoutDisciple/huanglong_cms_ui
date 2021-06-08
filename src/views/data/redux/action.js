@@ -1,4 +1,4 @@
-import { getData, getUserNumData, getPublishNumData } from '@service/order';
+import { getData, getUserNumData, getPublishNumData, getGoodsNumData, getCommentsNumData } from '@service/order';
 
 // 获取汇总数据
 export const getDataFunc = () => (dispatch) => {
@@ -46,4 +46,38 @@ export const getPublishNumDataFunc = () => (dispatch) => {
 	});
 };
 
-export const getSalesDataByRange = () => {};
+// 获取点赞增长曲线
+export const getGoodsNumDataFunc = () => (dispatch) => {
+	getGoodsNumData().then((res) => {
+		if (Array.isArray(res.data)) {
+			const xAxis = [];
+			const yAxis = [];
+			res.data.forEach((item) => {
+				xAxis.push(item.create_time);
+				yAxis.push(item.goods_total);
+			});
+			dispatch({
+				type: 'data/setGoodsData',
+				payload: { xAxis, yAxis },
+			});
+		}
+	});
+};
+
+// 获取评论增长曲线
+export const getCommentsNumDataFunc = () => (dispatch) => {
+	getCommentsNumData().then((res) => {
+		if (Array.isArray(res.data)) {
+			const xAxis = [];
+			const yAxis = [];
+			res.data.forEach((item) => {
+				xAxis.push(item.create_time);
+				yAxis.push(item.comment_total);
+			});
+			dispatch({
+				type: 'data/setCommnetsData',
+				payload: { xAxis, yAxis },
+			});
+		}
+	});
+};
