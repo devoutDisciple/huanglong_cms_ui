@@ -1,11 +1,10 @@
 import React, { useEffect, useCallback } from 'react';
 import moment from 'moment';
-import { Form, Input, Button, Col, Row, DatePicker } from 'antd';
+import { Form, Input, Button, Col, Row } from 'antd';
 import { useDispatch } from 'react-redux';
 import styles from './index.less';
 import * as action from './redux/action';
 
-const { RangePicker } = DatePicker;
 const dateFormat = 'YYYY-MM-DD';
 const FormItem = Form.Item;
 const colLayout = {
@@ -19,19 +18,24 @@ const formLayout = {
 	wrapperCol: { span: 18 },
 };
 
-export default () => {
+export default ({ controllerDialog, setModalStatus }) => {
 	const [form] = Form.useForm();
 	const dispatch = useDispatch();
 	const { validateFields } = form;
 
 	const submit = useCallback(async () => {
 		try {
-			const values = await validateFields(['username', 'phone', 'school', 'date']);
-			dispatch(action.getUsersByPageFunc(values));
+			const values = await validateFields(['name']);
+			dispatch(action.getPlatesByPageFunc(values));
 		} catch (error) {
 			console.log(error);
 		}
 	}, [dispatch, validateFields]);
+
+	const onClickAdd = () => {
+		setModalStatus('new');
+		controllerDialog();
+	};
 
 	useEffect(() => {
 		submit();
@@ -48,28 +52,16 @@ export default () => {
 				}}
 			>
 				<Col {...colLayout}>
-					<FormItem name="username" label="昵称">
+					<FormItem name="name" label="模块名称">
 						<Input placeholder="请输入" />
-					</FormItem>
-				</Col>
-				<Col {...colLayout}>
-					<FormItem name="phone" label="手机号">
-						<Input placeholder="请输入" />
-					</FormItem>
-				</Col>
-				<Col {...colLayout}>
-					<FormItem name="school" label="学校">
-						<Input placeholder="请输入" />
-					</FormItem>
-				</Col>
-				<Col {...colLayout}>
-					<FormItem name="date" label="注册日期">
-						<RangePicker allowClear={false} format={dateFormat} />
 					</FormItem>
 				</Col>
 				<Col {...colLayout} className={styles.search_btn}>
 					<Button onClick={submit} type="primary">
 						查询
+					</Button>
+					<Button onClick={onClickAdd} type="primary">
+						新增
 					</Button>
 				</Col>
 			</Form>

@@ -31,4 +31,4 @@ export const getUsersByPageFunc = (params) => (dispatch, getState) => {
 };
 
 // 获取用户增长曲线
-export const getUserNumDataFunc = () => (dispatch) => {};
+export const getUserNumDataFunc = () => () => {};

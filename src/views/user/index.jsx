@@ -1,8 +1,9 @@
 import React from 'react';
 import { Spin, Table } from 'antd';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Search from './Search';
 import './redux/reducer';
+import * as action from './redux/action';
 import styles from './index.less';
 
 export default () => {
@@ -11,6 +12,7 @@ export default () => {
 		condition: { current },
 		loading,
 	} = useSelector((state) => state.member);
+	const dispatch = useDispatch();
 
 	const columns = [
 		{
@@ -23,6 +25,11 @@ export default () => {
 			title: '昵称',
 			dataIndex: 'username',
 			key: 'username',
+		},
+		{
+			title: '手机号',
+			dataIndex: 'phone',
+			key: 'phone',
 		},
 		{
 			title: '性别',
@@ -72,15 +79,26 @@ export default () => {
 		},
 	];
 
+	const pageChange = (page) => {
+		dispatch(action.getUsersByPageFunc({ current: page }));
+	};
+
 	return (
 		<div className={styles.wrap}>
 			<Spin spinning={loading}>
 				<Search />
 				<div className={styles.table}>
 					<Table
+						rowKey="id"
 						dataSource={list}
 						columns={columns}
-						pagination={{ current, total: count, showTotal: (total) => `共 ${total} 条` }}
+						pagination={{
+							current,
+							total: count,
+							pageSize: 10,
+							showTotal: (total) => `共 ${total} 条`,
+							onChange: pageChange,
+						}}
 					/>
 				</div>
 			</Spin>
