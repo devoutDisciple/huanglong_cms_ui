@@ -1,4 +1,4 @@
-import { getPlatesByPage, deletePlateById, addPlate, editPlate } from '@service/common';
+import { getCircleByPage, deletePlateById, addPlate, editPlate } from '@service/common';
 import { message } from 'antd';
 // 设置loading
 const setLoading = (flag, dispatch) => {
@@ -15,7 +15,7 @@ export const getCirclesByPageFunc = (params) => (dispatch, getState) => {
 		circle: { condition },
 	} = getState();
 	params = { ...condition, ...params };
-	getPlatesByPage(params)
+	getCircleByPage(params)
 		.then((res) => {
 			dispatch({
 				type: 'circle/setTableData',

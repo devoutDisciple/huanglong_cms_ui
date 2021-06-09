@@ -42,25 +42,48 @@ export default () => {
 			key: 'name',
 		},
 		{
+			title: 'logo',
+			dataIndex: 'logo',
+			key: 'logo',
+			render: (txt) => <img className={styles.logo_img} alt="加载失败" src={txt} />,
+		},
+		{
+			title: '背景图',
+			dataIndex: 'bg_url',
+			key: 'bg_url',
+			render: (txt) => <img className={styles.bg_img} alt="加载失败" src={txt} />,
+		},
+		{
 			title: '所属模块',
 			dataIndex: 'plate',
 			key: 'plate',
-			render: (txt) => <img alt="加载失败" className={styles.table_img} src={txt} />,
+			render: (txt, record) => <span>{record.plateDetail ? record.plateDetail.name : ''}</span>,
 		},
+
 		{
-			title: '描述信息',
-			dataIndex: 'desc',
-			key: 'desc',
-		},
-		{
-			title: '关注',
+			title: '关注人数',
 			dataIndex: 'fellow',
 			key: 'fellow',
 		},
 		{
 			title: '内容',
-			dataIndex: 'content',
-			key: 'content',
+			dataIndex: 'contentNum',
+			key: 'contentNum',
+		},
+		{
+			title: '类型',
+			dataIndex: 'type',
+			key: 'type',
+			render: (txt) => <span>{txt === 1 ? '学校圈子' : '普通圈子'}</span>,
+		},
+		{
+			title: '地区',
+			dataIndex: 'address',
+			key: 'address',
+			render: (txt, record) => {
+				if (record.type === 1) return <span>{`${record.province} ${record.city} ${record.country}`}</span>;
+				return <span>--</span>;
+			},
 		},
 		{
 			title: '热度',
@@ -68,24 +91,9 @@ export default () => {
 			key: 'hot',
 		},
 		{
-			title: '类型',
-			dataIndex: 'type',
-			key: 'type',
-		},
-		{
-			title: '地区',
-			dataIndex: 'address',
-			key: 'address',
-		},
-		{
-			title: 'logo',
-			dataIndex: 'logo',
-			key: 'logo',
-		},
-		{
-			title: '背景图',
-			dataIndex: 'bg_url',
-			key: 'bg_url',
+			title: '描述信息',
+			dataIndex: 'desc',
+			key: 'desc',
 		},
 		{
 			title: '操作',
