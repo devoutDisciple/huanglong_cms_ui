@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import moment from 'moment';
 import { Form, Input, Button, Col, Row, DatePicker } from 'antd';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
-import * as action from '@store/global/action';
 import styles from './index.less';
+import * as action from './redux/action';
 
 const { RangePicker } = DatePicker;
 const dateFormat = 'YYYY-MM-DD';
@@ -23,18 +22,21 @@ const formLayout = {
 export default () => {
 	const [form] = Form.useForm();
 	const dispatch = useDispatch();
-	const history = useHistory();
-
 	const { validateFields } = form;
 
-	const submit = async () => {
+	const submit = useCallback(async () => {
 		try {
 			const values = await validateFields(['username', 'phone', 'school', 'date']);
 			console.log(values, 23322);
+			dispatch(action.getUsersByPageFunc(values));
 		} catch (error) {
 			console.log(error);
 		}
-	};
+	}, [dispatch, validateFields]);
+
+	useEffect(() => {
+		submit();
+	}, [submit]);
 	return (
 		<Row className={styles.search}>
 			<Form

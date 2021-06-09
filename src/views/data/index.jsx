@@ -5,7 +5,7 @@ import echarts from '@component/ercharts/index';
 import echarts_theme from '@component/ercharts/echarts_theme';
 import TitleChunk from './TitleChunk';
 import styles from './index.less';
-import './redux/redux';
+import './redux/reducer';
 import * as action from './redux/action';
 
 export default () => {

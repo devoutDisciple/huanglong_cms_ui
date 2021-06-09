@@ -1,4 +1,4 @@
-import { getData, getUserNumData, getPublishNumData, getGoodsNumData, getCommentsNumData } from '@service/order';
+import { getData, getUserNumData, getPublishNumData, getGoodsNumData, getCommentsNumData } from '@service/data';
 
 // 获取汇总数据
 export const getDataFunc = () => (dispatch) => {
