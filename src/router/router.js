@@ -39,12 +39,12 @@ const contentRouter = [
 		components: () => import('@views/plate/index'),
 	},
 	{
-		key: 'account',
+		key: 'circle',
 		name: '圈子管理',
-		path: '/home/account',
+		path: '/home/circle',
 		icon: '',
 		showMenu: true,
-		components: () => import('@views/shop/index'),
+		components: () => import('@views/circle/index'),
 	},
 	{
 		key: 'cabinet',
