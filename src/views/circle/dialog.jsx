@@ -15,7 +15,8 @@ export default ({ controllerDialog, onSearch, status, editData }) => {
 	const [form] = Form.useForm();
 	const dispatch = useDispatch();
 	const { plateList, addressList } = useSelector((state) => state.circle);
-	const { validateFields } = form;
+	const { validateFields, setFieldsValue } = form;
+	console.log(editData, 111);
 
 	const [state, setState] = useState({
 		title: '新增模块',
@@ -28,14 +29,21 @@ export default ({ controllerDialog, onSearch, status, editData }) => {
 	useEffect(() => {
 		if (status === 'new') {
 			setState({ title: '新增圈子', satus: 'new' });
+			setFieldsValue({ type: circleType });
 		} else {
 			setState({ title: '编辑圈子', satus: 'edit' });
+			setFieldsValue({
+				name: editData.name,
+				plate_id: editData.plate_id,
+				address: [editData.province, editData.city, editData.country],
+				type: editData.type,
+				desc: editData.desc,
+			});
 		}
-	}, [editData.name, editData.url, status]);
+	}, [circleType, editData, setFieldsValue, status]);
 
 	const handleOk = async () => {
 		const values = await validateFields(['name', 'plate_id', 'type', 'address', 'desc', 'logo', 'bgImg']);
-		console.log(values, 32222);
 		let logoFilename = '';
 		let bgFilename = '';
 		if (status === 'edit' && !values.logo) {
@@ -52,7 +60,10 @@ export default ({ controllerDialog, onSearch, status, editData }) => {
 			if (!bgFile) return message.warning('请上传图片');
 			bgFilename = JSON.parse(bgFile.xhr.response).data;
 		}
-		const [province, city, country] = selectAddress;
+		let { province, city, country } = editData;
+		if (Array.isArray(selectAddress)) {
+			[province, city, country] = selectAddress;
+		}
 		const postData = {
 			name: values.name,
 			plate_id: values.plate_id,
@@ -68,31 +79,22 @@ export default ({ controllerDialog, onSearch, status, editData }) => {
 			dispatch(action.addCircleFunc(postData, onSearch, controllerDialog));
 		} else {
 			postData.id = editData.id;
-			dispatch(action.editPlateFunc(postData, onSearch, controllerDialog));
+			dispatch(action.editCircleFunc(postData, onSearch, controllerDialog));
 		}
 	};
 
 	const handleCancel = controllerDialog;
 
-	let defaultFileList = [];
+	let logoDefaultFileList = [];
+	let bgDefaultFileList = [];
 	if (status === 'edit') {
-		defaultFileList = [{ uid: '-1', name: editData.name, url: editData.url, thumbUrl: editData.url }];
+		logoDefaultFileList = [{ uid: '-1', name: editData.name, url: editData.logo, thumbUrl: editData.logo }];
+		bgDefaultFileList = [{ uid: '-2', name: editData.name, url: editData.bg_url, thumbUrl: editData.bg_url }];
 	}
 
 	return (
 		<Modal className={styles.dialog} title={state.title} visible onOk={handleOk} onCancel={handleCancel}>
-			<Form
-				form={form}
-				{...formLayout}
-				layout="inline"
-				initialValues={
-					status === 'new'
-						? {
-								type: circleType,
-						  }
-						: { name: editData.name, sort: editData.sort }
-				}
-			>
+			<Form form={form} {...formLayout} layout="inline">
 				<Row className={styles.form_row}>
 					<FormItem name="name" label="圈子名称" rules={[{ required: true }]}>
 						<Input placeholder="请输入" />
@@ -119,7 +121,6 @@ export default ({ controllerDialog, onSearch, status, editData }) => {
 							<Cascader
 								options={addressList}
 								onChange={(keys, val) => {
-									console.log(val, 23);
 									const area = [];
 									val.forEach((item) => area.push(item.label));
 									setSelectAddress(area);
@@ -137,7 +138,7 @@ export default ({ controllerDialog, onSearch, status, editData }) => {
 				<Row className={styles.form_row}>
 					<FormItem name="logo" label="logo">
 						<Upload
-							defaultFileList={defaultFileList}
+							defaultFileList={logoDefaultFileList}
 							maxCount={1}
 							name="file"
 							action="/circle/upload"
@@ -151,7 +152,7 @@ export default ({ controllerDialog, onSearch, status, editData }) => {
 				<Row className={styles.form_row}>
 					<FormItem name="bgImg" label="背景图">
 						<Upload
-							defaultFileList={defaultFileList}
+							defaultFileList={bgDefaultFileList}
 							maxCount={1}
 							name="file"
 							action="/circle/upload"

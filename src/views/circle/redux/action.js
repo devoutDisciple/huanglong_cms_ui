@@ -1,4 +1,4 @@
-import { getCircleByPage, deleteCircle, addCircle, editPlate, getAllPlates, getAddressList } from '@service/common';
+import { getCircleByPage, deleteCircle, addCircle, editCircle, getAllPlates, getAddressList } from '@service/common';
 import { message } from 'antd';
 // 设置loading
 const setLoading = (flag, dispatch) => {
@@ -64,8 +64,8 @@ export const addCircleFunc = (params, onSearch, controllerDialog) => (dispatch) 
 };
 
 // 编辑模块
-export const editPlateFunc = (params, onSearch, controllerDialog) => (dispatch) => {
-	editPlate(params)
+export const editCircleFunc = (params, onSearch, controllerDialog) => (dispatch) => {
+	editCircle(params)
 		.then(() => {
 			message.success('编辑成功');
 			onSearch();
@@ -73,7 +73,8 @@ export const editPlateFunc = (params, onSearch, controllerDialog) => (dispatch) 
 		})
 		.finally(() => setLoading(false, dispatch));
 };
-// 删除模块
+
+// 删除圈子
 export const deleteCircleFunc = (params, onSearch) => (dispatch) => {
 	deleteCircle(params)
 		.then(() => {
