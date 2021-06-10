@@ -12,3 +12,9 @@ export const editPlate = (params) => request.post('/plate/edit', params);
 export const getCircleByPage = (params) => request.get('/circle/circlesByPage', params);
 
 export const getAllPlates = (params) => request.get('/plate/allPlates', params);
+
+export const getAddressList = (params) => request.get('/address/all', params);
+
+export const addCircle = (params) => request.post('/circle/add', params);
+
+export const deleteCircle = (params) => request.post('/circle/delete', params);

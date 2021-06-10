@@ -11,6 +11,7 @@ export default () => {
 	const {
 		data: { count, list },
 		condition: { current },
+		plateList,
 		loading,
 	} = useSelector((state) => state.circle);
 	const dispatch = useDispatch();
@@ -26,9 +27,10 @@ export default () => {
 
 	// 删除模块
 	const deleteRecord = (record) => {
-		dispatch(action.deletePlateByIdFunc({ plate_id: record.id }, onSearch));
+		dispatch(action.deleteCircleFunc({ circle_id: record.id }, onSearch));
 	};
 
+	// 编辑
 	const editRecord = (record) => {
 		setEditData(record);
 		setModalStatus('edit');
@@ -55,9 +57,9 @@ export default () => {
 		},
 		{
 			title: '所属模块',
-			dataIndex: 'plate',
-			key: 'plate',
-			render: (txt, record) => <span>{record.plateDetail ? record.plateDetail.name : ''}</span>,
+			dataIndex: 'plate_id',
+			key: 'plate_id',
+			render: (txt) => <span>{plateList.filter((item) => item.id === txt)[0]?.name}</span>,
 		},
 
 		{
@@ -118,6 +120,7 @@ export default () => {
 			),
 		},
 	];
+
 	const pageChange = (page) => {
 		dispatch(action.getCirclesByPageFunc({ current: page }));
 	};

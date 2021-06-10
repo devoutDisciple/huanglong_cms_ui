@@ -7,6 +7,7 @@ const initState = {
 		list: [],
 	},
 	plateList: [], // 模块信息
+	addressList: [], // 地址信息
 	condition: { current: 1 },
 };
 
@@ -24,6 +25,11 @@ const circle = (state = initState, action) => {
 			return {
 				...state,
 				plateList: action.payload,
+			};
+		case 'circle/addressList':
+			return {
+				...state,
+				addressList: action.payload,
 			};
 		default:
 			break;

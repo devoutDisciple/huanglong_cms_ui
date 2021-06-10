@@ -39,7 +39,9 @@ export default ({ controllerDialog, setModalStatus }) => {
 
 	useEffect(() => {
 		// 获取所有模块信息
-		dispatch(action.getPlateList());
+		dispatch(action.getPlateListFunc());
+		// 获取地址信息
+		dispatch(action.getAddressListFunc());
 		// 查询
 		submit();
 	}, [dispatch, submit]);
