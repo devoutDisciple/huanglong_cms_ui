@@ -49,10 +49,10 @@ const contentRouter = [
 	{
 		key: 'cabinet',
 		name: '内容管理',
-		path: '/home/cabinet',
+		path: '/home/content',
 		icon: '',
 		showMenu: true,
-		components: () => import('@views/shop/index'),
+		components: () => import('@views/content/index'),
 	},
 	{
 		key: 'shop',
@@ -60,7 +60,7 @@ const contentRouter = [
 		path: '/home/shop',
 		icon: '',
 		showMenu: true,
-		components: () => import('@views/shop/index'),
+		components: () => import('@views/address/index'),
 	},
 	{
 		key: 'swiper',

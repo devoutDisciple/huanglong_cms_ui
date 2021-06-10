@@ -1,0 +1,7 @@
+export const CONTENT_TYPE = [
+	{ label: '帖子', value: 'posts', num: 1 },
+	{ label: '博客', value: 'blog', num: 2 },
+	{ label: '投票', value: 'vote', num: 3 },
+	{ label: 'PK', value: 'battle', num: 4 },
+	{ label: '视频', value: 'video', num: 5 },
+];
