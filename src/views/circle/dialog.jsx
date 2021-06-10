@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, Form, Input, Row, InputNumber, Upload, Button, message } from 'antd';
-import { useDispatch } from 'react-redux';
+import { Modal, Form, Input, Row, InputNumber, Upload, Button, message, Select } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
 import { UploadOutlined } from '@ant-design/icons';
 import * as action from './redux/action';
 import styles from './index.less';
 
+const { Option } = Select;
 const FormItem = Form.Item;
 const formLayout = {
 	labelCol: { span: 5 },
@@ -12,15 +13,14 @@ const formLayout = {
 };
 export default ({ controllerDialog, onSearch, status, editData }) => {
 	const [form] = Form.useForm();
+	const dispatch = useDispatch();
+	const { plateList } = useSelector((state) => state.circle);
 
+	const { validateFields } = form;
 	const [state, setState] = useState({
 		title: '新增模块',
 		satus: 'new',
 	});
-
-	const dispatch = useDispatch();
-
-	const { validateFields } = form;
 
 	useEffect(() => {
 		if (status === 'new') {
@@ -73,7 +73,27 @@ export default ({ controllerDialog, onSearch, status, editData }) => {
 				initialValues={status === 'new' ? {} : { name: editData.name, sort: editData.sort }}
 			>
 				<Row className={styles.form_row}>
-					<FormItem name="name" label="模块名称" rules={[{ required: true }]}>
+					<FormItem name="name" label="圈子名称" rules={[{ required: true }]}>
+						<Input placeholder="请输入" />
+					</FormItem>
+				</Row>
+				<Row className={styles.form_row}>
+					<FormItem name="name" label="所属模块" rules={[{ required: true }]}>
+						<Select style={{ width: '100%' }} placeholder="请选择">
+							{plateList && plateList.map((item) => <Option value={item.id}>{item.name}</Option>)}
+						</Select>
+					</FormItem>
+				</Row>
+				<Row className={styles.form_row}>
+					<FormItem name="name" label="圈子类型" rules={[{ required: true }]}>
+						<Select style={{ width: '100%' }} placeholder="请选择">
+							<Option value={1}>学校圈子</Option>
+							<Option value={2}>其他圈子</Option>
+						</Select>
+					</FormItem>
+				</Row>
+				<Row className={styles.form_row}>
+					<FormItem name="name" label="描述信息" rules={[{ required: true }]}>
 						<Input placeholder="请输入" />
 					</FormItem>
 				</Row>

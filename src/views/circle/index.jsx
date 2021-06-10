@@ -14,7 +14,7 @@ export default () => {
 		loading,
 	} = useSelector((state) => state.circle);
 	const dispatch = useDispatch();
-	const [visible, setVisible] = useState(false);
+	const [visible, setVisible] = useState(true);
 	const [editData, setEditData] = useState({});
 	const [modalStatus, setModalStatus] = useState('new');
 

@@ -38,8 +38,11 @@ export default ({ controllerDialog, setModalStatus }) => {
 	};
 
 	useEffect(() => {
+		// 获取所有模块信息
+		dispatch(action.getPlateList());
+		// 查询
 		submit();
-	}, [submit]);
+	}, [dispatch, submit]);
 
 	return (
 		<Row className={styles.search}>
