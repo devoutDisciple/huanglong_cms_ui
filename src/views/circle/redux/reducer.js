@@ -8,7 +8,8 @@ const initState = {
 	},
 	plateList: [], // 模块信息
 	addressList: [], // 地址信息
-	condition: { current: 1 },
+	condition: { current: 1 }, // 查询条件
+	topicList: [], // 话题查询条件
 };
 
 const circle = (state = initState, action) => {
@@ -30,6 +31,11 @@ const circle = (state = initState, action) => {
 			return {
 				...state,
 				addressList: action.payload,
+			};
+		case 'topic/setTopicList':
+			return {
+				...state,
+				topicList: action.payload,
 			};
 		default:
 			break;

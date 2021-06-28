@@ -1,4 +1,12 @@
-import { getCircleByPage, deleteCircle, addCircle, editCircle, getAllPlates, getAddressList } from '@service/common';
+import {
+	getCircleByPage,
+	deleteCircle,
+	addCircle,
+	editCircle,
+	getAllPlates,
+	getAddressList,
+	getAllTopics,
+} from '@service/common';
 import { message } from 'antd';
 // 设置loading
 const setLoading = (flag, dispatch) => {
@@ -43,7 +51,6 @@ export const getAddressListFunc = () => (dispatch) => {
 	setLoading(true, dispatch);
 	getAddressList()
 		.then((res) => {
-			console.log(res, 32);
 			dispatch({
 				type: 'circle/addressList',
 				payload: res.data,
@@ -80,6 +87,18 @@ export const deleteCircleFunc = (params, onSearch) => (dispatch) => {
 		.then(() => {
 			message.success('删除成功');
 			onSearch();
+		})
+		.finally(() => setLoading(false, dispatch));
+};
+
+// 查询所有话题
+export const onSearchTopics = (params) => (dispatch) => {
+	getAllTopics(params)
+		.then((res) => {
+			dispatch({
+				type: 'topic/setTopicList',
+				payload: res.data,
+			});
 		})
 		.finally(() => setLoading(false, dispatch));
 };

@@ -117,7 +117,7 @@ export default ({ controllerDialog, onSearch, status, editData }) => {
 				</Row>
 				{circleType === 1 && (
 					<Row className={styles.form_row}>
-						<FormItem name="address" label="所属区域" rules={[{ required: true }]}>
+						<FormItem name="address" label="地址" rules={[{ required: true }]}>
 							<Cascader
 								options={addressList}
 								onChange={(keys, val) => {

@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import Search from './Search';
 import './redux/reducer';
 import * as action from './redux/action';
-import Dialog from './dialog';
+import Dialog from './circleDialog';
+import TopicDetailDialog from './topicDetailDialog';
 import styles from './index.less';
 
 export default () => {
@@ -15,15 +16,16 @@ export default () => {
 		loading,
 	} = useSelector((state) => state.circle);
 	const dispatch = useDispatch();
-	const [visible, setVisible] = useState(false);
-	const [editData, setEditData] = useState({});
-	const [modalStatus, setModalStatus] = useState('new');
-
+	const [circleEditData, setCircleEditData] = useState({});
+	const [circleVisible, setCircleVisible] = useState(false);
+	const [circlemodalStatus, setCircleModalStatus] = useState('new');
+	const [topicDialogVisible, setTopicDialogVisible] = useState(false);
+	const [circleId, setCircleId] = useState('');
 	const onSearch = () => {
 		dispatch(action.getCirclesByPageFunc({}));
 	};
 
-	const controllerDialog = () => setVisible(!visible);
+	const controllerCircleDialog = () => setCircleVisible(!circleVisible);
 
 	// 删除模块
 	const deleteRecord = (record) => {
@@ -32,10 +34,23 @@ export default () => {
 
 	// 编辑
 	const editRecord = (record) => {
-		setEditData(record);
-		setModalStatus('edit');
-		controllerDialog();
+		setCircleEditData(record);
+		setCircleModalStatus('edit');
+		controllerCircleDialog();
 	};
+
+	const controllerTopicDetailDialog = () => {
+		setTopicDialogVisible(!topicDialogVisible);
+	};
+
+	// 查看标签
+	const onSearchTag = (record) => {
+		setCircleId(record.id);
+		controllerTopicDetailDialog();
+	};
+
+	// 添加标签
+	const addTag = () => {};
 
 	const columns = [
 		{
@@ -112,9 +127,14 @@ export default () => {
 					>
 						<Button type="link">删除</Button>
 					</Popconfirm>
-
 					<Button onClick={() => editRecord(record)} type="link">
 						编辑
+					</Button>
+					<Button onClick={() => onSearchTag(record)} type="link">
+						查看话题
+					</Button>
+					<Button onClick={() => addTag(record)} type="link">
+						添加话题
 					</Button>
 				</span>
 			),
@@ -128,7 +148,7 @@ export default () => {
 	return (
 		<div className={styles.wrap}>
 			<Spin spinning={loading}>
-				<Search controllerDialog={controllerDialog} setModalStatus={setModalStatus} />
+				<Search controllerDialog={controllerCircleDialog} setModalStatus={setCircleModalStatus} />
 				<div className={styles.table}>
 					<Table
 						rowKey="id"
@@ -144,13 +164,16 @@ export default () => {
 					/>
 				</div>
 			</Spin>
-			{visible && (
+			{circleVisible && (
 				<Dialog
 					onSearch={onSearch}
-					editData={editData}
-					status={modalStatus}
-					controllerDialog={controllerDialog}
+					editData={circleEditData}
+					status={circlemodalStatus}
+					controllerDialog={controllerCircleDialog}
 				/>
+			)}
+			{topicDialogVisible && (
+				<TopicDetailDialog circleId={circleId} controllerDialog={controllerTopicDetailDialog} />
 			)}
 		</div>
 	);

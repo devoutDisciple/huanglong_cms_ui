@@ -1,6 +1,7 @@
 import React from 'react';
 import { Spin, Table } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
+import { filterIdentity } from '@utils/filter';
 import Search from './Search';
 import './redux/reducer';
 import * as action from './redux/action';
@@ -32,13 +33,19 @@ export default () => {
 			key: 'phone',
 		},
 		{
+			title: '认证',
+			dataIndex: 'identity',
+			key: 'identity',
+			render: (txt) => <span>{filterIdentity(txt)}</span>,
+		},
+		{
 			title: '性别',
 			dataIndex: 'sex',
 			key: 'sex',
 			render: (txt) => <span>{txt === 1 ? '男' : '女'}</span>,
 		},
 		{
-			title: '所属区域',
+			title: '地址',
 			dataIndex: 'address',
 			key: 'address',
 		},

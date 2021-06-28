@@ -17,7 +17,7 @@ const webpackDevConfig = {
 		clientLogLevel: 'none',
 		proxy: {
 			'/**': {
-				target: 'http://localhost:8081',
+				target: 'http://localhost:9999',
 				changeOrigin: true,
 			},
 		},

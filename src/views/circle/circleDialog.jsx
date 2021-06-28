@@ -16,7 +16,6 @@ export default ({ controllerDialog, onSearch, status, editData }) => {
 	const dispatch = useDispatch();
 	const { plateList, addressList } = useSelector((state) => state.circle);
 	const { validateFields, setFieldsValue } = form;
-	console.log(editData, 111);
 
 	const [state, setState] = useState({
 		title: '新增模块',
@@ -31,6 +30,7 @@ export default ({ controllerDialog, onSearch, status, editData }) => {
 			setState({ title: '新增圈子', satus: 'new' });
 			setFieldsValue({ type: circleType });
 		} else {
+			setCircleType(editData.type);
 			setState({ title: '编辑圈子', satus: 'edit' });
 			setFieldsValue({
 				name: editData.name,
@@ -117,7 +117,7 @@ export default ({ controllerDialog, onSearch, status, editData }) => {
 				</Row>
 				{circleType === 1 && (
 					<Row className={styles.form_row}>
-						<FormItem name="address" label="所属区域" rules={[{ required: true }]}>
+						<FormItem name="address" label="地址" rules={[{ required: true }]}>
 							<Cascader
 								options={addressList}
 								onChange={(keys, val) => {
