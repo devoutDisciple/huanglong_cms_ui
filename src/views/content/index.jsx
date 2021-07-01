@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Spin, Table, Button, Popconfirm } from 'antd';
+import { Spin, Table, Button, Popconfirm, message } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { CONTENT_TYPE } from '@utils/const';
+import { filterContentTypeByTxt } from '@utils/filter';
+import request from '@utils/AxiosRequest';
 import Search from './Search';
 import './redux/reducer';
 import * as action from './redux/action';
@@ -16,6 +17,7 @@ export default () => {
 	} = useSelector((state) => state.content);
 	const dispatch = useDispatch();
 	const [detailDialogVisible, setDetailDialogVisible] = useState(false);
+	const [contentDetailId, setContentDetailId] = useState('');
 
 	const onSearch = () => {
 		dispatch(action.getContentsByPageFunc({}));
@@ -23,19 +25,22 @@ export default () => {
 
 	const controllerDetailDialog = () => setDetailDialogVisible(!detailDialogVisible);
 
-	// 删除模块
+	// 删除内容
 	const deleteRecord = (record) => {
-		dispatch(action.deleteCircleFunc({ circle_id: record.id }, onSearch));
+		request.get('/content/deleteById', { contentId: record.id }).then(() => {
+			message.success('删除成功');
+			onSearch();
+		});
 	};
 
 	const columns = [
 		{
-			title: '用户名称',
+			title: '发布人',
 			dataIndex: 'username',
 			key: 'username',
 		},
 		{
-			title: '圈子',
+			title: '发布圈子',
 			dataIndex: 'circle_names',
 			key: 'circle_names',
 			render: (txt) => {
@@ -44,7 +49,7 @@ export default () => {
 			},
 		},
 		{
-			title: '话题',
+			title: '包含话题',
 			dataIndex: 'topic_names',
 			key: 'topic_names',
 			render: (txt) => {
@@ -53,10 +58,10 @@ export default () => {
 			},
 		},
 		{
-			title: '类型',
+			title: '发布类型',
 			dataIndex: 'type',
 			key: 'type',
-			render: (txt) => <span>{CONTENT_TYPE.filter((item) => item.num === txt)[0]?.label}</span>,
+			render: (txt) => <span>{filterContentTypeByTxt(txt)}</span>,
 		},
 
 		{
@@ -71,13 +76,13 @@ export default () => {
 		},
 		{
 			title: '转发',
-			dataIndex: 'type',
-			key: 'type',
+			dataIndex: 'share',
+			key: 'share',
 		},
 		{
 			title: '热度',
-			dataIndex: 'share',
-			key: 'share',
+			dataIndex: 'hot',
+			key: 'hot',
 		},
 		{
 			title: '发布时间',
@@ -99,7 +104,13 @@ export default () => {
 					>
 						<Button type="link">删除</Button>
 					</Popconfirm>
-					<Button onClick={() => {}} type="link">
+					<Button
+						onClick={() => {
+							controllerDetailDialog();
+							setContentDetailId(record.id);
+						}}
+						type="link"
+					>
 						详情
 					</Button>
 				</span>
@@ -130,7 +141,9 @@ export default () => {
 					/>
 				</div>
 			</Spin>
-			{detailDialogVisible && <DetailDialog controllerDialog={controllerDetailDialog} />}
+			{detailDialogVisible && (
+				<DetailDialog contentId={contentDetailId} controllerDialog={controllerDetailDialog} />
+			)}
 		</div>
 	);
 };

@@ -1,12 +1,4 @@
-import {
-	getAllCircles,
-	getContentsByPage,
-	deleteCircle,
-	addCircle,
-	editCircle,
-	getAllPlates,
-	getAddressList,
-} from '@service/common';
+import { getAllCircles, getContentsByPage, addCircle, editCircle, getAllPlates, getAddressList } from '@service/common';
 import moment from 'moment';
 import { message } from 'antd';
 // 设置loading
@@ -96,16 +88,6 @@ export const editCircleFunc = (params, onSearch, controllerDialog) => (dispatch)
 			message.success('编辑成功');
 			onSearch();
 			controllerDialog();
-		})
-		.finally(() => setLoading(false, dispatch));
-};
-
-// 删除圈子
-export const deleteCircleFunc = (params, onSearch) => (dispatch) => {
-	deleteCircle(params)
-		.then(() => {
-			message.success('删除成功');
-			onSearch();
 		})
 		.finally(() => setLoading(false, dispatch));
 };

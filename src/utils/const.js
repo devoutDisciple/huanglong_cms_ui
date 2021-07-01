@@ -4,4 +4,7 @@ export const CONTENT_TYPE = [
 	{ label: '投票', value: 'vote', num: 3 },
 	{ label: 'PK', value: 'battle', num: 4 },
 	{ label: '视频', value: 'video', num: 5 },
+	{ label: '图片', value: 'img', num: 6 },
 ];
+
+export const test = '';

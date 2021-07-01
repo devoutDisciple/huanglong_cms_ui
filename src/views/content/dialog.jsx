@@ -16,7 +16,6 @@ export default ({ controllerDialog, onSearch, status, editData }) => {
 	const dispatch = useDispatch();
 	const { plateList, addressList } = useSelector((state) => state.content);
 	const { validateFields, setFieldsValue } = form;
-	console.log(editData, 111);
 
 	const [state, setState] = useState({
 		title: '新增模块',
