@@ -1,32 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { Modal, Form, Table } from 'antd';
+import React, { useEffect, useCallback, useState } from 'react';
+import { Modal, Button, Table } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import * as action from './redux/action';
+import AddTopicDialog from './AddTopicDialog';
 import styles from './index.less';
 
 export default ({ circleId, controllerDialog }) => {
-	const columns = [
-		{
-			title: '话题名称',
-			dataIndex: 'name',
-			key: 'name',
-		},
-		{
-			title: '排序',
-			dataIndex: 'sort',
-			key: 'sort',
-		},
-		{
-			title: '操作',
-			dataIndex: 'name',
-			key: 'name',
-		},
-	];
 	const { topicList } = useSelector((state) => state.circle);
+	const [addDialogVisible, setAddDialogVisible] = useState(false);
 	const dispatch = useDispatch();
-	useEffect(() => {
+
+	const onSearch = useCallback(() => {
 		dispatch(action.onSearchTopics({ circle_id: circleId }));
 	}, [circleId, dispatch]);
+
+	useEffect(() => {
+		onSearch();
+	}, [circleId, onSearch]);
 
 	const handleOk = () => {
 		controllerDialog();
@@ -36,9 +26,41 @@ export default ({ circleId, controllerDialog }) => {
 		controllerDialog();
 	};
 
+	const onDeleteTopic = (record) => {
+		dispatch(action.onDeleteTopic({ topicId: record.id }, onSearch));
+	};
+
+	const controllerTopicDialog = () => {
+		setAddDialogVisible(!addDialogVisible);
+	};
+
+	const columns = [
+		{
+			title: '话题名称',
+			dataIndex: 'name',
+			key: 'name',
+		},
+		{
+			title: '操作',
+			dataIndex: 'operation',
+			key: 'operation',
+			render: (txt, record) => (
+				<Button onClick={() => onDeleteTopic(record)} type="link">
+					删除
+				</Button>
+			),
+		},
+	];
+
 	return (
 		<Modal className={styles.dialog} title="话题" visible onOk={handleOk} onCancel={handleCancel}>
-			<Table rowKey="id" dataSource={topicList} columns={columns} pagination={{}} />
+			<div>
+				<Button type="primary" onClick={controllerTopicDialog}>
+					添加话题
+				</Button>
+			</div>
+			<Table rowKey="id" dataSource={topicList} columns={columns} pagination={false} />
+			{addDialogVisible && <AddTopicDialog circleId={circleId} controllerDialog={controllerTopicDialog} />}
 		</Modal>
 	);
 };

@@ -6,6 +6,7 @@ import {
 	getAllPlates,
 	getAddressList,
 	getAllTopics,
+	deleteTopic,
 } from '@service/common';
 import { message } from 'antd';
 // 设置loading
@@ -100,5 +101,12 @@ export const onSearchTopics = (params) => (dispatch) => {
 				payload: res.data,
 			});
 		})
+		.finally(() => setLoading(false, dispatch));
+};
+
+// 查询所有话题
+export const onDeleteTopic = (params, onSearch) => (dispatch) => {
+	deleteTopic(params)
+		.then(() => onSearch())
 		.finally(() => setLoading(false, dispatch));
 };

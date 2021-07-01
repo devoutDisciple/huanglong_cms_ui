@@ -49,9 +49,6 @@ export default () => {
 		controllerTopicDetailDialog();
 	};
 
-	// 添加标签
-	const addTag = () => {};
-
 	const columns = [
 		{
 			title: '圈子名称',
@@ -131,10 +128,7 @@ export default () => {
 						编辑
 					</Button>
 					<Button onClick={() => onSearchTag(record)} type="link">
-						查看话题
-					</Button>
-					<Button onClick={() => addTag(record)} type="link">
-						添加话题
+						话题操作
 					</Button>
 				</span>
 			),

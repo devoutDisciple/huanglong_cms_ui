@@ -26,3 +26,5 @@ export const getAllCircles = (params) => request.get('/circle/circlesDetail', pa
 export const getContentsByPage = (params) => request.get('/content/contentsByPage', params);
 
 export const getAllTopics = (params) => request.get('/topic/allByCircleId', params);
+
+export const deleteTopic = (params) => request.post('/topic/delete', params);
