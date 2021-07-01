@@ -7,4 +7,8 @@ export const CONTENT_TYPE = [
 	{ label: '图片', value: 'img', num: 6 },
 ];
 
-export const test = '';
+export const ADDRESS_TYPE = [
+	{ label: '省', value: 1 },
+	{ label: '市', value: 2 },
+	{ label: '县/区', value: 3 },
+];

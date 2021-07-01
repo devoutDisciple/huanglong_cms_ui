@@ -76,3 +76,21 @@ export const filterBattleType = (type) => {
 	}
 	return txt;
 };
+
+export const filterAddressType = (type) => {
+	let txt = '省';
+	switch (Number(type)) {
+		case 1:
+			txt = '省';
+			break;
+		case 2:
+			txt = '市';
+			break;
+		case 3:
+			txt = '县/区';
+			break;
+		default:
+			break;
+	}
+	return txt;
+};

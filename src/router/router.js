@@ -56,8 +56,8 @@ const contentRouter = [
 	},
 	{
 		key: 'shop',
-		name: '地址管理',
-		path: '/home/shop',
+		name: '区域管理',
+		path: '/home/area',
 		icon: '',
 		showMenu: true,
 		components: () => import('@views/address/index'),
