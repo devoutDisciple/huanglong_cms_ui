@@ -12,7 +12,7 @@ export default () => {
 	const [provinceDetail, setProvinceDetail] = useState({});
 	const [cityDialogVisible, setCityDialogVisible] = useState(false);
 	const [cityDetail, setCityDetail] = useState({});
-	const [countryDialogVisible, setCountryDialogVisible] = useState(true);
+	const [countryDialogVisible, setCountryDialogVisible] = useState(false);
 	const [provinceDialogVisible, setProvinceDialogVisible] = useState(false);
 
 	const onSearch = () => {

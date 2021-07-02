@@ -12,3 +12,8 @@ export const ADDRESS_TYPE = [
 	{ label: '市', value: 2 },
 	{ label: '县/区', value: 3 },
 ];
+
+export const FEEDBACK_TYPE = [
+	{ label: '圈子反馈', value: 1 },
+	{ label: '意见反馈', value: 2 },
+];

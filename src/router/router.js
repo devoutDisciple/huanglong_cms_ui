@@ -63,12 +63,12 @@ const contentRouter = [
 		components: () => import('@views/address/index'),
 	},
 	{
-		key: 'swiper',
+		key: 'opinion',
 		name: '意见和反馈',
-		path: '/home/swiper',
+		path: '/home/opinion',
 		icon: '',
 		showMenu: true,
-		components: () => import('@views/shop/index'),
+		components: () => import('@views/opinion/index'),
 	},
 ];
 
