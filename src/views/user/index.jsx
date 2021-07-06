@@ -1,5 +1,5 @@
 import React from 'react';
-import { Spin, Table } from 'antd';
+import { Spin, Table, Button } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { filterIdentity } from '@utils/filter';
 import Search from './Search';
@@ -83,6 +83,24 @@ export default () => {
 			title: '注册时间',
 			dataIndex: 'create_time',
 			key: 'create_time',
+		},
+		{
+			title: '操作',
+			dataIndex: 'operation',
+			key: 'operation',
+			render: (txt, record) => (
+				<>
+					<Button onClick={() => {}} type="link">
+						评论记录
+					</Button>
+					<Button onClick={() => {}} type="link">
+						点赞记录
+					</Button>
+					<Button onClick={() => {}} type="link">
+						发布记录
+					</Button>
+				</>
+			),
 		},
 	];
 

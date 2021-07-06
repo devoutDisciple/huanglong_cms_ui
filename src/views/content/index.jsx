@@ -3,10 +3,10 @@ import { Spin, Table, Button, Popconfirm, message } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { filterContentTypeByTxt } from '@utils/filter';
 import request from '@utils/AxiosRequest';
+import DetailDialog from '@component/contentDetail/index';
 import Search from './Search';
 import './redux/reducer';
 import * as action from './redux/action';
-import DetailDialog from './detailDialog';
 import styles from './index.less';
 
 export default () => {
@@ -16,7 +16,7 @@ export default () => {
 		loading,
 	} = useSelector((state) => state.content);
 	const dispatch = useDispatch();
-	const [detailDialogVisible, setDetailDialogVisible] = useState(false);
+	const [detailDialogVisible, setDetailDialogVisible] = useState(true);
 	const [contentDetailId, setContentDetailId] = useState('');
 
 	const onSearch = () => {
@@ -142,7 +142,8 @@ export default () => {
 				</div>
 			</Spin>
 			{detailDialogVisible && (
-				<DetailDialog contentId={contentDetailId} controllerDialog={controllerDetailDialog} />
+				// <DetailDialog contentId={contentDetailId} controllerDialog={controllerDetailDialog} />
+				<DetailDialog contentId={139} controllerDialog={controllerDetailDialog} />
 			)}
 		</div>
 	);

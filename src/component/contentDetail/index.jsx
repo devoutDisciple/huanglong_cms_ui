@@ -6,7 +6,7 @@ import VideoContent from '@component/video/index';
 import PostsContent from '@component/posts/index';
 import VoteContent from '@component/vote/index';
 import BattleCOntent from '@component/battle/index';
-import styles from './index.less';
+import Comment from '@component/comment/index';
 
 export default ({ contentId, controllerDialog }) => {
 	const [detail, setDetail] = useState({ userDetail: {}, postsDetail: {}, videoDetail: {} });
@@ -21,7 +21,7 @@ export default ({ contentId, controllerDialog }) => {
 		controllerDialog();
 	};
 	return (
-		<Modal title="详情" footer={null} width="1000px" className={styles.detail} visible onCancel={onCancel}>
+		<Modal title="详情" footer={null} width="1000px" visible onCancel={onCancel}>
 			<Descriptions title="基本内容">
 				<Descriptions.Item label="发布人姓名">{detail.userDetail.username}</Descriptions.Item>
 				{/* <Descriptions.Item label="发布人头像">
@@ -43,6 +43,8 @@ export default ({ contentId, controllerDialog }) => {
 			{detail.type === 3 && <VoteContent detail={detail.voteDetail} />}
 			{detail.type === 4 && <BattleCOntent detail={detail.battleDetail} />}
 			{detail.type === 5 && <VideoContent detail={detail.videoDetail} />}
+			<Descriptions title="评论详情" />
+			<Comment contentId={contentId} />
 		</Modal>
 	);
 };

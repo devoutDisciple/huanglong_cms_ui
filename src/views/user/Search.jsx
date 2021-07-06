@@ -44,7 +44,7 @@ export default () => {
 				{...formLayout}
 				layout="inline"
 				initialValues={{
-					date: [moment(moment().subtract(7, 'day'), dateFormat), moment(new Date(), dateFormat)],
+					date: [moment(moment().subtract(30, 'day'), dateFormat), moment(new Date(), dateFormat)],
 				}}
 			>
 				<Col {...colLayout}>
